@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         auth=FirebaseAuth.getInstance()
 
@@ -44,6 +45,9 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         lgnBtn.setOnClickListener {
+            Log.i("Clicked","Login Button")
+            Log.i("Mail",mail.text.toString().trim())
+            Log.i("Password",pswd.text.toString().trim())
             auth.signInWithEmailAndPassword(mail.text.toString().trim(),pswd.text.toString().trim())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

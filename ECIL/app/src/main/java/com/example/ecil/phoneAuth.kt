@@ -24,6 +24,8 @@ class phoneAuth : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phone_auth)
+        supportActionBar?.hide()
+
         auth=FirebaseAuth.getInstance()
         num=findViewById(R.id.num)
         getOTP=findViewById(R.id.getOTP)

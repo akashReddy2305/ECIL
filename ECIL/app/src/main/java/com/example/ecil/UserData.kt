@@ -22,14 +22,31 @@ object UserData {
             Log.e(TAG, "addNote : note collection is null !!")
         }
     }
-    data class Note(val col1:String,val col2:Int,val col3:Int,val col4:Int){
+    data class Note(val col1:String,val col2:String?,val col3:String?,val col4:Int?){
         companion object {
             fun from(noteData : Todo) : Note {
 //                Log.i("From","Inside From")
-                val result = Note(noteData.pname, noteData.col1, noteData.col2,noteData.col3)
+                val res=convertToDecimal(noteData.col2)
+                Log.i("result",res)
+                val result = Note(noteData.pname, noteData.col1.toString(), res,noteData.col3)
 //                Log.i("from",result.toString())
                 return result
             }
+        }
+    }
+    fun convertToDecimal(input: String): String {
+        val isNegative = input.startsWith("-")
+        val absoluteValue = if (isNegative) input.substring(1) else input
+
+        return if (absoluteValue.length >= 2) {
+            val decimalPart = absoluteValue.substring(absoluteValue.length - 2)
+            val integerPart = absoluteValue.substring(0, absoluteValue.length - 2)
+            val result = "$integerPart.$decimalPart"
+            if (isNegative) "-$result" else result
+        } else {
+            val paddedValue = absoluteValue.padStart(2, '0')
+            val result = "0.$paddedValue"
+            if (isNegative) "-$result" else result
         }
     }
 }

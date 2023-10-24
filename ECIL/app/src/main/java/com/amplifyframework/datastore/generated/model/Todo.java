@@ -30,7 +30,7 @@ public final class Todo implements Model {
   private final @ModelField(targetType="String", isRequired = true) String plant;
   private final @ModelField(targetType="String") String pname;
   private final @ModelField(targetType="Int") Integer col1;
-  private final @ModelField(targetType="Int") Integer col2;
+  private final @ModelField(targetType="String") String col2;
   private final @ModelField(targetType="Int") Integer col3;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
@@ -54,7 +54,7 @@ public final class Todo implements Model {
       return col1;
   }
   
-  public Integer getCol2() {
+  public String getCol2() {
       return col2;
   }
   
@@ -70,7 +70,7 @@ public final class Todo implements Model {
       return updatedAt;
   }
   
-  private Todo(String id, String plant, String pname, Integer col1, Integer col2, Integer col3) {
+  private Todo(String id, String plant, String pname, Integer col1, String col2, Integer col3) {
     this.id = id;
     this.plant = plant;
     this.pname = pname;
@@ -170,7 +170,7 @@ public final class Todo implements Model {
     BuildStep id(String id);
     BuildStep pname(String pname);
     BuildStep col1(Integer col1);
-    BuildStep col2(Integer col2);
+    BuildStep col2(String col2);
     BuildStep col3(Integer col3);
   }
   
@@ -180,7 +180,7 @@ public final class Todo implements Model {
     private String plant;
     private String pname;
     private Integer col1;
-    private Integer col2;
+    private String col2;
     private Integer col3;
     @Override
      public Todo build() {
@@ -215,7 +215,7 @@ public final class Todo implements Model {
     }
     
     @Override
-     public BuildStep col2(Integer col2) {
+     public BuildStep col2(String col2) {
         this.col2 = col2;
         return this;
     }
@@ -238,7 +238,7 @@ public final class Todo implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String plant, String pname, Integer col1, Integer col2, Integer col3) {
+    private CopyOfBuilder(String id, String plant, String pname, Integer col1, String col2, Integer col3) {
       super.id(id);
       super.plant(plant)
         .pname(pname)
@@ -263,7 +263,7 @@ public final class Todo implements Model {
     }
     
     @Override
-     public CopyOfBuilder col2(Integer col2) {
+     public CopyOfBuilder col2(String col2) {
       return (CopyOfBuilder) super.col2(col2);
     }
     
