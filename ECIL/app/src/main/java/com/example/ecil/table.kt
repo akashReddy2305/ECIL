@@ -55,7 +55,8 @@ class table : AppCompatActivity() {
             Amplify.API.query(
                 ModelQuery.list(Todo::class.java,filter1),
                 { response ->
-                    response.data.forEach { todo ->
+                    val sortedData = response.data.sortedBy { it.plant }
+                    sortedData.forEach { todo ->
 //                        Log.i("MyAmplifyApp", todo.plant)
 //                        Log.i("MyAmplifyApp", todo.col1.toString())
                             UserData.addNote(UserData.Note.from(todo))
