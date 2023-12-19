@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home">
+    tools:context=".Navigation.Home">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -83,4 +83,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.612" />
+
+
+    <RadioGroup
+        android:layout_width="157dp"
+        android:layout_height="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView">
+
+        <RadioButton
+            android:id="@+id/Single"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:text="Single Tag" />
+
+        <RadioButton
+            android:id="@+id/Full"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All Tags"
+            tools:layout_editor_absoluteX="73dp"
+            tools:layout_editor_absoluteY="316dp" />
+    </RadioGroup>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

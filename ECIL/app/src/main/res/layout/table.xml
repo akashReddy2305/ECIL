@@ -42,31 +42,28 @@
             android:layout_height="match_parent">
             <TableRow>
                 <LinearLayout>
+
                     <TextView
-                        android:text="Point Name"
+                        android:layout_width="118dp"
+                        android:layout_height="50dp"
                         android:background="@color/purple_200"
                         android:gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="50dp"/>
-                    <TextView
                         android:text="pttype"
-                        android:textColorHighlight="@color/black"
-                        android:background="@color/purple_200"
-                        android:gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="50dp"/>
+                        android:textColorHighlight="@color/black" />
+
                     <TextView
-                        android:text="fvalue"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
                         android:background="@color/purple_200"
                         android:gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="50dp"/>
+                        android:text="fvalue" />
+
                     <TextView
-                        android:text="@string/state"
+                        android:layout_width="132dp"
+                        android:layout_height="50dp"
                         android:background="@color/purple_200"
                         android:gravity="center"
-                        android:layout_width="200dp"
-                        android:layout_height="50dp"/>
+                        android:text="@string/state" />
                 </LinearLayout>
             </TableRow>
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
