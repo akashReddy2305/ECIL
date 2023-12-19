@@ -26,9 +26,9 @@ object UserData {
         companion object {
             fun from(noteData : Todo) : Note {
 //                Log.i("From","Inside From")
-                val res=convertToDecimal(noteData.col2)
+                val res= noteData.col2 + ".00"
                 Log.i("result",res)
-                val result = Note(noteData.pname, noteData.col1.toString(), res,noteData.col3)
+                val result = Note(noteData.pname, "ANALOG", res,noteData.col3)
 //                Log.i("from",result.toString())
                 return result
             }
@@ -38,15 +38,20 @@ object UserData {
         val isNegative = input.startsWith("-")
         val absoluteValue = if (isNegative) input.substring(1) else input
 
-        return if (absoluteValue.length >= 2) {
-            val decimalPart = absoluteValue.substring(absoluteValue.length - 2)
-            val integerPart = absoluteValue.substring(0, absoluteValue.length - 2)
-            val result = "$integerPart.$decimalPart"
+        return if (absoluteValue.isNotEmpty()) {
+            val result = if (absoluteValue.length >= 2) {
+                val decimalPart = absoluteValue.substring(absoluteValue.length - 2)
+                val integerPart = absoluteValue.substring(0, absoluteValue.length - 2)
+                "$integerPart.$decimalPart"
+            } else {
+                val paddedValue = absoluteValue.padStart(2, '0')
+                "0.$paddedValue"
+            }
+
             if (isNegative) "-$result" else result
         } else {
-            val paddedValue = absoluteValue.padStart(2, '0')
-            val result = "0.$paddedValue"
-            if (isNegative) "-$result" else result
+            "0.00"  // Default value when the input is empty
         }
     }
+
 }

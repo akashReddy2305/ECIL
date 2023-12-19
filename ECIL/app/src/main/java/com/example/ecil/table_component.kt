@@ -30,24 +30,25 @@ class table_component(private val values: MutableList<UserData.Note>?) :
         holder.column4.text = item?.col4.toString()
         Log.i("onBindViewHolder", holder.column1.text as String)
         Log.i("onBindViewHolder",item?.col1.toString())
-        val col4Value = item?.col4?:0
-        if (col4Value == 1) {
+        var col4Value = item?.col4?:0
+        col4Value = col4Value % 100
+        if (col4Value < 50) {
             holder.column4.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
-            holder.column3.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
-            holder.column2.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
-            holder.column1.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
+//            holder.column3.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
+//            holder.column2.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
+//            holder.column1.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
         }
-        else if (col4Value == 3){
+        else if (col4Value <= 60){
             holder.column4.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
-            holder.column3.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
-            holder.column2.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
-            holder.column1.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
+//            holder.column3.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
+//            holder.column2.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
+//            holder.column1.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
         }
         else {
-            holder.column4.setBackgroundColor(Color.TRANSPARENT) // Set default background color if needed
-            holder.column3.setBackgroundColor(Color.TRANSPARENT)
-            holder.column2.setBackgroundColor(Color.TRANSPARENT)
-            holder.column1.setBackgroundColor(Color.TRANSPARENT)
+            holder.column4.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm)) // Set default background color if needed
+//            holder.column3.setBackgroundColor(Color.TRANSPARENT)
+//            holder.column2.setBackgroundColor(Color.TRANSPARENT)
+//            holder.column1.setBackgroundColor(Color.TRANSPARENT)
         }
 
     }
