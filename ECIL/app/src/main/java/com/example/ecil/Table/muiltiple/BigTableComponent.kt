@@ -29,36 +29,93 @@ class BigTableComponent(private val values: MutableList<UserData.Note>?) :
         holder.column3.text = item?.col3.toString()
         holder.column4.text = item?.col4.toString()
         Log.i("onBindViewHolder",item?.col1.toString())
-        var col3Value = item?.col3.toString().toDouble()
-        if (col3Value < 50) {
-            holder.column4.text = "GOOD"
-            holder.column3.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.alarm))
-            holder.column4.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,
-                R.color.alarm
-            ))
+        if(item?.col2.toString().equals("ANALOG")) {
+            var col3Value = item?.col3.toString().toDouble()
+            if (col3Value < 50) {
+                holder.column4.text = "GOOD"
+                holder.column3.setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.alarm
+                    )
+                )
+                holder.column4.setBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.alarm
+                    )
+                )
 //            holder.column3.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
 //            holder.column2.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
 //            holder.column1.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.alarm))
-        }
-        else if (col3Value <= 60){
-            holder.column4.text = "BAD"
-            holder.column3.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.fail))
-            holder.column4.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,
-                R.color.fail
-            ))
+            } else if (col3Value <= 60) {
+                holder.column4.text = "BAD"
+                holder.column3.setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.fail
+                    )
+                )
+                holder.column4.setBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.fail
+                    )
+                )
 //            holder.column3.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
 //            holder.column2.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
 //            holder.column1.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.fail))
-        }
-        else {
-            holder.column4.text = "GOOD"
-            holder.column3.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.alarm))
-            holder.column4.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,
-                R.color.alarm
-            )) // Set default background color if needed
+            } else {
+                holder.column4.text = "GOOD"
+                holder.column3.setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.alarm
+                    )
+                )
+                holder.column4.setBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.alarm
+                    )
+                ) // Set default background color if needed
 //            holder.column3.setBackgroundColor(Color.TRANSPARENT)
 //            holder.column2.setBackgroundColor(Color.TRANSPARENT)
 //            holder.column1.setBackgroundColor(Color.TRANSPARENT)
+            }
+        }
+        else{
+            var col3Value = item?.col3.toString().toDouble()
+            if(col3Value==0.00){
+                holder.column4.text = "OFF"
+                holder.column3.setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.fail
+                    )
+                )
+                holder.column4.setBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.fail
+                    )
+                )
+            }
+            else if(col3Value==1.00){
+                holder.column4.text = "ON"
+                holder.column3.setTextColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.alarm
+                    )
+                )
+                holder.column4.setBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.alarm
+                    )
+                )
+            }
         }
 
     }

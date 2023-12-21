@@ -2,6 +2,8 @@ package com.example.ecil.Table
 
 import android.os.Bundle
 import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +23,16 @@ class BigTable : AppCompatActivity() {
     private lateinit var title:TextView
     private lateinit var tool:Toolbar
     private lateinit var swipe:SwipeRefreshLayout
+    val handler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_big_table)
         supportActionBar?.hide()
-//        val adapter = list.adapter as table_component
+        renderingScreen()
+    }
+
+    fun renderingScreen(){
+//                val adapter = list.adapter as table_component
         val locval = intent.getStringExtra("location")
         Log.i("Button", locval!!)
         val filter1 = Todo.PLANT.contains(locval!!)

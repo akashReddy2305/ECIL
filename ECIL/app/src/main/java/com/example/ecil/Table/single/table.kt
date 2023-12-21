@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.amplifyframework.api.graphql.model.ModelPagination
 import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.datastore.generated.model.Todo
@@ -54,14 +55,15 @@ class table : AppCompatActivity() {
             UserData._notes.value?.clear()
             list.adapter?.notifyDataSetChanged()
             Amplify.API.query(
-                ModelQuery.list(Todo::class.java,combinedFilter),
+                ModelQuery.list(Todo::class.java,combinedFilter, ModelPagination.limit(10000)),
                 { response ->
+                    Log.i("Responce data",response.data.items.toString())
                     val sortedData = response.data.sortedBy { it.plant }
                     sortedData.forEach { todo ->
 //                        Log.i("MyAmplifyApp", todo.plant)
 //                        Log.i("MyAmplifyApp", todo.col1.toString())
                         UserData.addNote(UserData.Note.from(todo))
-                            Log.i("From ls",todo.col2.toString())
+//                            Log.i("From ls",todo.col2.toString())
                     }
                     Log.i("Inside Query","data for each")
                 },
