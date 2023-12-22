@@ -11,9 +11,9 @@ import android.widget.Toast
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.core.Amplify
+import com.example.ecil.MobAuth.phoneAuth
+import com.example.ecil.Navigation.Home
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                         Log.d(TAG, "signInWithEmail:success")
                         auth.signOut()
                         Log.i("USER",auth.currentUser.toString())
-                        var intent = Intent(applicationContext,phoneAuth::class.java)
+                        var intent = Intent(applicationContext, phoneAuth::class.java)
                         startActivity(intent)
                     }
                     else {

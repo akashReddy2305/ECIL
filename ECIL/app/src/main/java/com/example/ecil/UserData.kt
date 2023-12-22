@@ -8,6 +8,7 @@ import com.amplifyframework.datastore.generated.model.Todo
 object UserData {
     private const val TAG = "UserData"
     public val _notes = MutableLiveData<MutableList<Note>>(mutableListOf())
+    public val _notesTemp = MutableLiveData<MutableList<Note>>(mutableListOf())
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.postValue(this.value)
     }
@@ -18,6 +19,16 @@ object UserData {
         if (notes != null) {
             notes.add(n)
             _notes.notifyObserver()
+        } else {
+            Log.e(TAG, "addNote : note collection is null !!")
+        }
+    }
+    fun addNoteTemp(n : Note) {
+//        Log.i("User Data","addNote")
+        val notes = _notesTemp.value
+        if (notes != null) {
+            notes.add(n)
+            _notesTemp.notifyObserver()
         } else {
             Log.e(TAG, "addNote : note collection is null !!")
         }

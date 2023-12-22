@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,19 +14,28 @@
         android:theme="@style/Theme.ECIL"
         tools:targetApi="31">
         <activity
-            android:name=".table"
+            android:name=".Table.BigTable"
             android:exported="false" />
         <activity
-            android:name=".table_component"
+            android:name=".Table.BigTableComponent"
             android:exported="false" />
         <activity
-            android:name=".Verify"
+            android:name=".Navigation.Home2"
             android:exported="false" />
         <activity
-            android:name=".phoneAuth"
+            android:name=".Table.single.table"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".Table.single.table_component"
+            android:exported="false" />
+        <activity
+            android:name=".MobAuth.Verify"
+            android:exported="false" />
+        <activity
+            android:name=".MobAuth.phoneAuth"
+            android:exported="false" />
+        <activity
+            android:name=".Navigation.Home"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

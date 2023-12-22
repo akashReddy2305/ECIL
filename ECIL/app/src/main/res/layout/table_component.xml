@@ -5,37 +5,32 @@
     android:orientation="horizontal"
     android:paddingVertical="4dp">
     <TableRow>
-    <TextView
-        android:id="@+id/col1"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:hint="col1"/>
-    <TextView
-        android:id="@+id/col2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:hint="col2"/>
-    <TextView
-        android:id="@+id/col3"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:hint="col3"/>
-    <TextView
-        android:id="@+id/col4"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:hint="col4"/>
+
+        <TextView
+            android:id="@+id/col2"
+            android:layout_width="122dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:hint="col2"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/col3"
+            android:layout_width="132dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:hint="col3"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/col4"
+            android:layout_width="159dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:hint="col4"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </TableRow>
 </TableLayout>
