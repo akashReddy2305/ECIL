@@ -1,0 +1,49 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateTodo(
+  $input: CreateTodoInput!
+  $condition: ModelTodoConditionInput
+) {
+  createTodo(input: $input, condition: $condition) {
+    id
+    plant
+    pname
+    col1
+    col2
+    col3
+    cnt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTodo(
+  $input: UpdateTodoInput!
+  $condition: ModelTodoConditionInput
+) {
+  updateTodo(input: $input, condition: $condition) {
+    id
+    plant
+    pname
+    col1
+    col2
+    col3
+    cnt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTodo(
+  $input: DeleteTodoInput!
+  $condition: ModelTodoConditionInput
+) {
+  deleteTodo(input: $input, condition: $condition) {
+    id
+    plant
+    pname
+    col1
+    col2
+    col3
+    cnt
+    createdAt
+    updatedAt
+  }
+}

@@ -1,6 +1,5 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +18,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the Todo type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Todos", type = Model.Type.USER, version = 1)
+@Index(name = "byId", fields = {"cnt","id"})
 public final class Todo implements Model {
   public static final QueryField ID = field("Todo", "id");
   public static final QueryField PLANT = field("Todo", "plant");
@@ -26,14 +26,18 @@ public final class Todo implements Model {
   public static final QueryField COL1 = field("Todo", "col1");
   public static final QueryField COL2 = field("Todo", "col2");
   public static final QueryField COL3 = field("Todo", "col3");
-  private final @ModelField(targetType="ID", isRequired = true) String id;
+  public static final QueryField CNT = field("Todo", "cnt");
+  public static final QueryField CREATED_AT = field("Todo", "createdAt");
+  public static final QueryField UPDATED_AT = field("Todo", "updatedAt");
+  private final @ModelField(targetType="String", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String plant;
   private final @ModelField(targetType="String") String pname;
-  private final @ModelField(targetType="Int") Integer col1;
+  private final @ModelField(targetType="String") String col1;
   private final @ModelField(targetType="String") String col2;
   private final @ModelField(targetType="Int") Integer col3;
-  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
-  private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
+  private final @ModelField(targetType="Int", isRequired = true) Integer cnt;
+  private final @ModelField(targetType="String", isRequired = true) String createdAt;
+  private final @ModelField(targetType="String", isRequired = true) String updatedAt;
   public String resolveIdentifier() {
     return id;
   }
@@ -50,7 +54,7 @@ public final class Todo implements Model {
       return pname;
   }
   
-  public Integer getCol1() {
+  public String getCol1() {
       return col1;
   }
   
@@ -62,21 +66,28 @@ public final class Todo implements Model {
       return col3;
   }
   
-  public Temporal.DateTime getCreatedAt() {
+  public Integer getCnt() {
+      return cnt;
+  }
+  
+  public String getCreatedAt() {
       return createdAt;
   }
   
-  public Temporal.DateTime getUpdatedAt() {
+  public String getUpdatedAt() {
       return updatedAt;
   }
   
-  private Todo(String id, String plant, String pname, Integer col1, String col2, Integer col3) {
+  private Todo(String id, String plant, String pname, String col1, String col2, Integer col3, Integer cnt, String createdAt, String updatedAt) {
     this.id = id;
     this.plant = plant;
     this.pname = pname;
     this.col1 = col1;
     this.col2 = col2;
     this.col3 = col3;
+    this.cnt = cnt;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
   
   @Override
@@ -93,6 +104,7 @@ public final class Todo implements Model {
               ObjectsCompat.equals(getCol1(), todo.getCol1()) &&
               ObjectsCompat.equals(getCol2(), todo.getCol2()) &&
               ObjectsCompat.equals(getCol3(), todo.getCol3()) &&
+              ObjectsCompat.equals(getCnt(), todo.getCnt()) &&
               ObjectsCompat.equals(getCreatedAt(), todo.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), todo.getUpdatedAt());
       }
@@ -107,6 +119,7 @@ public final class Todo implements Model {
       .append(getCol1())
       .append(getCol2())
       .append(getCol3())
+      .append(getCnt())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -123,6 +136,7 @@ public final class Todo implements Model {
       .append("col1=" + String.valueOf(getCol1()) + ", ")
       .append("col2=" + String.valueOf(getCol2()) + ", ")
       .append("col3=" + String.valueOf(getCol3()) + ", ")
+      .append("cnt=" + String.valueOf(getCnt()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -148,6 +162,9 @@ public final class Todo implements Model {
       null,
       null,
       null,
+      null,
+      null,
+      null,
       null
     );
   }
@@ -158,10 +175,28 @@ public final class Todo implements Model {
       pname,
       col1,
       col2,
-      col3);
+      col3,
+      cnt,
+      createdAt,
+      updatedAt);
   }
   public interface PlantStep {
-    BuildStep plant(String plant);
+    CntStep plant(String plant);
+  }
+  
+
+  public interface CntStep {
+    CreatedAtStep cnt(Integer cnt);
+  }
+  
+
+  public interface CreatedAtStep {
+    UpdatedAtStep createdAt(String createdAt);
+  }
+  
+
+  public interface UpdatedAtStep {
+    BuildStep updatedAt(String updatedAt);
   }
   
 
@@ -169,17 +204,20 @@ public final class Todo implements Model {
     Todo build();
     BuildStep id(String id);
     BuildStep pname(String pname);
-    BuildStep col1(Integer col1);
+    BuildStep col1(String col1);
     BuildStep col2(String col2);
     BuildStep col3(Integer col3);
   }
   
 
-  public static class Builder implements PlantStep, BuildStep {
+  public static class Builder implements PlantStep, CntStep, CreatedAtStep, UpdatedAtStep, BuildStep {
     private String id;
     private String plant;
+    private Integer cnt;
+    private String createdAt;
+    private String updatedAt;
     private String pname;
-    private Integer col1;
+    private String col1;
     private String col2;
     private Integer col3;
     @Override
@@ -192,13 +230,37 @@ public final class Todo implements Model {
           pname,
           col1,
           col2,
-          col3);
+          col3,
+          cnt,
+          createdAt,
+          updatedAt);
     }
     
     @Override
-     public BuildStep plant(String plant) {
+     public CntStep plant(String plant) {
         Objects.requireNonNull(plant);
         this.plant = plant;
+        return this;
+    }
+    
+    @Override
+     public CreatedAtStep cnt(Integer cnt) {
+        Objects.requireNonNull(cnt);
+        this.cnt = cnt;
+        return this;
+    }
+    
+    @Override
+     public UpdatedAtStep createdAt(String createdAt) {
+        Objects.requireNonNull(createdAt);
+        this.createdAt = createdAt;
+        return this;
+    }
+    
+    @Override
+     public BuildStep updatedAt(String updatedAt) {
+        Objects.requireNonNull(updatedAt);
+        this.updatedAt = updatedAt;
         return this;
     }
     
@@ -209,7 +271,7 @@ public final class Todo implements Model {
     }
     
     @Override
-     public BuildStep col1(Integer col1) {
+     public BuildStep col1(String col1) {
         this.col1 = col1;
         return this;
     }
@@ -238,9 +300,12 @@ public final class Todo implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String plant, String pname, Integer col1, String col2, Integer col3) {
+    private CopyOfBuilder(String id, String plant, String pname, String col1, String col2, Integer col3, Integer cnt, String createdAt, String updatedAt) {
       super.id(id);
       super.plant(plant)
+        .cnt(cnt)
+        .createdAt(createdAt)
+        .updatedAt(updatedAt)
         .pname(pname)
         .col1(col1)
         .col2(col2)
@@ -253,12 +318,27 @@ public final class Todo implements Model {
     }
     
     @Override
+     public CopyOfBuilder cnt(Integer cnt) {
+      return (CopyOfBuilder) super.cnt(cnt);
+    }
+    
+    @Override
+     public CopyOfBuilder createdAt(String createdAt) {
+      return (CopyOfBuilder) super.createdAt(createdAt);
+    }
+    
+    @Override
+     public CopyOfBuilder updatedAt(String updatedAt) {
+      return (CopyOfBuilder) super.updatedAt(updatedAt);
+    }
+    
+    @Override
      public CopyOfBuilder pname(String pname) {
       return (CopyOfBuilder) super.pname(pname);
     }
     
     @Override
-     public CopyOfBuilder col1(Integer col1) {
+     public CopyOfBuilder col1(String col1) {
       return (CopyOfBuilder) super.col1(col1);
     }
     

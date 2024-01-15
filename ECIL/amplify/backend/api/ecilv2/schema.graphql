@@ -1,11 +1,16 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
 type Todo @model {
-  id: ID!
+  id: String!
   plant: String!
   pname: String
-  col1:Int
-  col2:Int
-  col3:Int
+  col1: String
+  col2: String
+  col3: Int
+  cnt: Int!
+  @index(name: "byId", queryField: "todosById", sortKeyFields: ["id"])
+  createdAt: String!
+  updatedAt: String!
 }

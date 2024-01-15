@@ -8,6 +8,7 @@ import com.amplifyframework.datastore.generated.model.Todo
 object UserData {
     private const val TAG = "UserData"
     public val _notes = MutableLiveData<MutableList<Note>>(mutableListOf())
+    public val _notesTemp = MutableLiveData<MutableList<Note>>(mutableListOf())
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.postValue(this.value)
     }
@@ -22,16 +23,29 @@ object UserData {
             Log.e(TAG, "addNote : note collection is null !!")
         }
     }
-    data class Note(val col1:String,val col2:String?,val col3:String?,val col4:Int?){
-        companion object {
-            fun from(noteData : Todo) : Note {
-//                Log.i("From","Inside From")
-                val res= noteData.col2 + ".00"
-                Log.i("result",res)
-                val result = Note(noteData.pname, "ANALOG", res,noteData.col3)
-//                Log.i("from",result.toString())
+    fun addNoteTemp(n : Note) {
+//        Log.i("User Data","addNote")
+        val notes = _notesTemp.value
+        if (notes != null) {
+            notes.add(n)
+            _notesTemp.notifyObserver()
+        } else {
+            Log.e(TAG, "addNote : note collection is null !!")
+        }
+    }
+    data class Note(val col1:Any?, val col2:Any?,val col3:Any?,val col4:Any?){
+        companion object{
+            fun from(noteData: Todo) : Note{
+                val res = noteData.col2 + ".00"
+                val result = Note(noteData.pname,noteData.col1,res,noteData.col3)
                 return result
             }
+            fun frm(sdata: MutableList<Any?>) : Note{
+                val res1 = sdata[4].toString()
+                val result1 = Note(sdata.get(2),sdata.get(3),res1,sdata.get(5))
+                return  result1
+            }
+
         }
     }
     fun convertToDecimal(input: String): String {

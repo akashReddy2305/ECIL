@@ -1,13 +1,14 @@
 
 type Todo {
-  id: ID!
+  id: String!
   plant: String!
   pname: String
-  col1: Int
-  col2: Int
+  col1: String
+  col2: String
   col3: Int
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
+  cnt: Int!
+  createdAt: String!
+  updatedAt: String!
 }
 
 input ModelStringInput {
@@ -166,12 +167,15 @@ type ModelTodoConnection {
 }
 
 input ModelTodoFilterInput {
-  id: ModelIDInput
+  id: ModelStringInput
   plant: ModelStringInput
   pname: ModelStringInput
-  col1: ModelIntInput
-  col2: ModelIntInput
+  col1: ModelStringInput
+  col2: ModelStringInput
   col3: ModelIntInput
+  cnt: ModelIntInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
   and: [ModelTodoFilterInput]
   or: [ModelTodoFilterInput]
   not: ModelTodoFilterInput
@@ -180,35 +184,45 @@ input ModelTodoFilterInput {
 type Query {
   getTodo(id: ID!): Todo
   listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  todosById(cnt: Int!, id: ModelStringKeyConditionInput, sortDirection: ModelSortDirection, filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
 }
 
 input ModelTodoConditionInput {
   plant: ModelStringInput
   pname: ModelStringInput
-  col1: ModelIntInput
-  col2: ModelIntInput
+  col1: ModelStringInput
+  col2: ModelStringInput
   col3: ModelIntInput
+  cnt: ModelIntInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
   and: [ModelTodoConditionInput]
   or: [ModelTodoConditionInput]
   not: ModelTodoConditionInput
 }
 
 input CreateTodoInput {
-  id: ID
+  id: String
   plant: String!
   pname: String
-  col1: Int
-  col2: Int
+  col1: String
+  col2: String
   col3: Int
+  cnt: Int!
+  createdAt: String
+  updatedAt: String
 }
 
 input UpdateTodoInput {
-  id: ID!
+  id: String!
   plant: String
   pname: String
-  col1: Int
-  col2: Int
+  col1: String
+  col2: String
   col3: Int
+  cnt: Int
+  createdAt: String
+  updatedAt: String
 }
 
 input DeleteTodoInput {
@@ -222,12 +236,15 @@ type Mutation {
 }
 
 input ModelSubscriptionTodoFilterInput {
-  id: ModelSubscriptionIDInput
+  id: ModelSubscriptionStringInput
   plant: ModelSubscriptionStringInput
   pname: ModelSubscriptionStringInput
-  col1: ModelSubscriptionIntInput
-  col2: ModelSubscriptionIntInput
+  col1: ModelSubscriptionStringInput
+  col2: ModelSubscriptionStringInput
   col3: ModelSubscriptionIntInput
+  cnt: ModelSubscriptionIntInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
   and: [ModelSubscriptionTodoFilterInput]
   or: [ModelSubscriptionTodoFilterInput]
 }
@@ -236,5 +253,15 @@ type Subscription {
   onCreateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["createTodo"])
   onUpdateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["updateTodo"])
   onDeleteTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["deleteTodo"])
+}
+
+input ModelStringKeyConditionInput {
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  between: [String]
+  beginsWith: String
 }
 

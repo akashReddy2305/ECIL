@@ -6,12 +6,23 @@
             "awsAPIPlugin": {
                 "ecilv2": {
                     "endpointType": "GraphQL",
-                    "endpoint": "https://gfpauk2drzcm5fbjtgr3wqwoqq.appsync-api.ap-south-1.amazonaws.com/graphql",
+                    "endpoint": "https://hhcbk77pbnhlrn5qomkmhczu5u.appsync-api.ap-south-1.amazonaws.com/graphql",
                     "region": "ap-south-1",
                     "authorizationType": "API_KEY",
-                    "apiKey": "da2-hgjtfaqli5c6he3tq5vj7wwmxy"
+                    "apiKey": "da2-jbhfuzhwfjem5gjk7mwwakuh6u"
                 }
             }
         }
+    },
+    "codegen": {
+        "plugins": [
+          {
+            "name": "awsAPIPlugin",
+            "packageName": "com.amplifyframework.datastore.generated.model",
+            "modelGenOptions": {
+              "authRules": ["public"]
+            }
+          }
+        ]
     }
 }
